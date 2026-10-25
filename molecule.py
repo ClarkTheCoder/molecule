@@ -21,5 +21,8 @@ def arp_scan(target):
 def port_scan(target):
     print(f"{INFO} starting port scan on {target}...")
 
+def banner_grab(target, port):
+    print(f"{INFO} starting banner grab on {target} via port {port}...")
+
 banner()
 
