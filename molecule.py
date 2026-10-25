@@ -42,5 +42,18 @@ if __name__ == "__main__":
     if len(sys.argv) < 3:
         usage()
 
+    command = sys.argv[1]
+    target = sys.argv[2]
 
-
+    if command == "arp-scan":
+        arp_scan(target)
+    elif command == "port-scan":
+        port_scan(target)
+    elif command == "banner-grab":
+            if len(sys.argv) < 4:
+                print(f"{BAD} Please provide a port for banner grabbing")
+                usage()
+            port = int(sys.argv[3])
+            banner_grab(target, port)
+    elif command == "dns-lookup":
+        dns_lookup(target)
