@@ -24,5 +24,23 @@ def port_scan(target):
 def banner_grab(target, port):
     print(f"{INFO} starting banner grab on {target} via port {port}...")
 
-banner()
+def dns_lookup(target):
+    print(f"{INFO} starting DNS lookup on {target}...")
+
+def usage():
+    print("Usage:")
+    print(f"  python3 molecule.py arp-scan <IP/CIDR>")
+    print(f"  python3 molecule.py port-scan <IP>")
+    print(f"  python3 molecule.py banner-grab <IP> <port>")
+    print(f"  python3 molecule.py dns-lookup <hostname>")
+    sys.exit(1)
+
+if __name__ == "__main__":
+    banner()
+
+    # user did not provide enough arguments - COME ON MAN 
+    if len(sys.argv) < 3:
+        usage()
+
+
 
