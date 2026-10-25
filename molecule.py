@@ -1,3 +1,11 @@
+from scapy.all import ARP, Ether, srp
+import sys
+import socket
+
+INFO = "[*]"
+GOOD = "[+]"
+BAD = "[-]"
+
 def banner():
     print("""
  _____         _               _     
@@ -7,4 +15,8 @@ def banner():
     network recon tool | by naughty_b0y
     """)
 
+def arp_scan():
+    print(f"{INFO} Starting ARP scan...")
+
 banner()
+
