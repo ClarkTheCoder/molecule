@@ -15,8 +15,11 @@ def banner():
     network recon tool | by naughty_b0y
     """)
 
-def arp_scan():
-    print(f"{INFO} Starting ARP scan...")
+def arp_scan(target):
+    print(f"{INFO} Starting ARP scan on ...")
+
+def port_scan(target):
+    print(f"{INFO} starting port scan on {target}...")
 
 banner()
 
