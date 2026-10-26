@@ -16,7 +16,20 @@ def banner():
     """)
 
 def arp_scan(target):
-    print(f"{INFO} Starting ARP scan on ...")
+    print(f"{INFO} Starting ARP scan on {target}...")
+    print(f"{'IP':<20} MAC")
+    print("-" * 30)
+
+    arp = ARP(pdst=target)
+    ether = Ether(dst="ff:ff:ff:ff:ff:ff")
+    packet = ether / arp
+
+    result = srp(packet, timeout=3, verbose=False)[0]
+
+    for sent, received in result:
+        print(f"{received.psrc:<20} {received.hwsrc}")
+
+    print(f"\n {INFO} ARP scan completed on {target}. \n {len(result)} hosts found.")
 
 def port_scan(target):
     print(f"{INFO} starting port scan on {target}...")
