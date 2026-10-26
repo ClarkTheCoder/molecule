@@ -1,5 +1,6 @@
 from scapy.all import ARP, Ether, srp
 import sys
+import subprocess
 import socket
 
 INFO = "[*]"
@@ -15,7 +16,16 @@ def banner():
     network recon tool | by naughty_b0y
     """)
 
+def get_local_ip():
+    result = subprocess.run(["ipconfig", "getifaddr", "en0"], capture_output=True, text=True)
+    return result.stdout.strip()
+
 def arp_scan(target):
+    if target == "auto":
+        local_ip = get_local_ip()
+        target = local_ip.rsplit('.', 1)[0] + ".0/24"
+        print(f"{INFO} Auto-detected subnet: {target}")
+
     print(f"{INFO} Starting ARP scan on {target}...")
     print(f"{'IP':<20} MAC")
     print("-" * 30)
@@ -42,7 +52,7 @@ def dns_lookup(target):
 
 def usage():
     print("Usage:")
-    print(f"  python3 molecule.py arp-scan <IP/CIDR>")
+    print(f"  python3 molecule.py arp-scan <IP/CIDR> or auto to auto-detect subnet")
     print(f"  python3 molecule.py port-scan <IP>")
     print(f"  python3 molecule.py banner-grab <IP> <port>")
     print(f"  python3 molecule.py dns-lookup <hostname>")
@@ -70,3 +80,6 @@ if __name__ == "__main__":
             banner_grab(target, port)
     elif command == "dns-lookup":
         dns_lookup(target)
+    else:
+        print(f"{BAD} Unknown command: {command}")
+        usage()
