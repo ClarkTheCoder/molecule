@@ -78,7 +78,7 @@ def port_scan(target, timeout=1):
         sock.close()
 
         if result == 0:
-            print(f"{port:<20} {'open':<10} {service}")
+            print(f"{port:<20} {'open':<20} {service}")
             open_ports += 1
 
     print(f"\n{INFO} Port scan complete on {target}. {open_ports} open port(s) found on {target}")
