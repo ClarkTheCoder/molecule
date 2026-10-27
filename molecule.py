@@ -44,7 +44,7 @@ def arp_scan(target):
 def port_scan(target, timeout=1):
     print(f"{INFO} starting port scan on {target}...")
     print(f"{'PORT':<20} {'STATE':20} SERVICE")
-    print("-" * 30)
+    print("-" * 50)
 
     common_ports = {
         21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP",
